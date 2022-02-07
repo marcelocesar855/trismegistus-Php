@@ -15,8 +15,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
     integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
     crossorigin="anonymous"></script>
-    <script src="https://smtpjs.com/v3/smtp.js">
-    </script>
   <script>
     var prevScrollpos = window.pageYOffset;
     window.onscroll = function () {
@@ -35,24 +33,18 @@
       if (name != "") {
         if (email != "" && email.search("@") > 1) {
           if (mensagem != "") {
-            //var ajaxUrl = "send.php",
-            //  data = {
-            //    "subject": name + " entrou em contato!",
-            //    "message": "<h2>Nova mensagem de " + name + "!</h2><br><h3>Email: " + email + "</h3><br><h4>Mensagem: " + mensagem + "</h4>"
-            //  }
+            var ajaxUrl = "send.php",
+             data = {
+               "subject": name + " entrou em contato!",
+               "message": "<h2>Nova mensagem de " + name + "!</h2><br><h3>Email: " + email + "</h3><br><h4>Mensagem: " + mensagem + "</h4>"
+             }
             $("#loader").removeClass("visually-hidden");
-            Email.send({
-                Host : "localhost",
-                To : 'contato@trismegistuscapital.com',
-                From : "contato@trismegistuscapital.com",
-                Subject : name + " entrou em contato!",
-                Body : "<h2>Nova mensagem de " + name + "!</h2><br><h3>Email: " + email + "</h3><br><h4>Mensagem: " + mensagem + "</h4>"
-            });
-            //$.post(ajaxUrl, data, function (response) {
+            
+            $.post(ajaxUrl, data, function (response) {
               $('#mail').trigger("reset");
               $("#loader").addClass("visually-hidden");
               $("#toast").toast("show");
-            //});
+            });
           } else {
             alert("Nos diga o que te trouxe até aqui! :)")
           }
